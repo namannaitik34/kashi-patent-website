@@ -1,0 +1,391 @@
+
+"use client";
+
+import type { Service } from '@/lib/services';
+import { whyChooseUsReasons, serviceIcons } from '@/lib/services';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
+import { Eye, FileText, Calendar, ArrowLeft, ArrowRight, ShoppingCart } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+// Extend JSX to include model-viewer
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'model-viewer': React.DetailedHTMLProps<
+        React.AllHTMLAttributes<any> & {
+          src: string;
+          alt: string;
+          'camera-controls'?: boolean;
+          'auto-rotate'?: boolean;
+          style?: React.CSSProperties;
+        },
+        any
+      >;
+    }
+  }
+}
+
+export default function ServicePageClient({ service, prevSlug, nextSlug, prevService, nextService }: { service: Service, prevSlug: string, nextSlug: string, prevService: Service, nextService: Service }) {
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .animate-infinite-scroll:hover {
+            animation-play-state: paused !important;
+          }
+          .animate-infinite-scroll-reverse:hover {
+            animation-play-state: paused !important;
+          }
+        `
+      }} />
+      <div className="bg-background relative pt-20">
+        {/* Hero Section */}
+      <section className="relative h-[60vh] w-full bg-black flex items-center justify-center">
+        <Image
+            src={service.image}
+            alt={service.title}
+            fill
+            className="object-cover opacity-50"
+            data-ai-hint={service.imageHint}
+            priority
+        />
+        <div className="absolute inset-0 flex flex-col items-start justify-center">
+            <div className="container text-left text-white relative z-10 ">
+                <Badge variant="secondary" className="mb-4 bg-white/20 text-white backdrop-blur-sm sm:mt-20">Kashi Patent Drawings and Design Services</Badge>
+                <h1 className="font-headline text-4xl md:text-6xl font-bold">{service.title}</h1>
+                <p className="mt-4 max-w-3xl text-lg text-white/90">{service.longDescription}</p>
+                <div className="mt-6 inline-block">
+                    <div className=" border text-accent-foreground rounded-lg px-6 py-3 font-bold text-lg">
+                        Starting at ${service.price} per {service.pricePer}
+                    </div>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      {/* Content Section */}
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto justify-items-center">                    <Button variant="outline" size="lg" className="bg-white/10 border-black/20 text-black hover:bg-white/20 hover:text-black/50 backdrop-blur-sm">
+                        <Eye className="mr-2 h-5 w-5" />
+                        View Samples
+                    </Button>
+                    <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                        <Link href="/order">
+                            <FileText className="mr-2 h-5 w-5" />
+                            Get Quote
+                        </Link>
+                    </Button>
+                    <Button size="lg" className="bg-white text-primary hover:bg-white/90">
+                        <Calendar className="mr-2 h-5 w-5" />
+                        Schedule Free Consultancy
+                    </Button>
+                </div>
+
+      <div className="container py-20 md:py-28">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          
+            {/* Left Column */}
+            <div className="lg:col-span-2">
+                 <div className="prose lg:prose-xl max-w-none text-foreground/90 space-y-12">
+                    <div>
+                        <h2 className="font-headline text-3xl text-primary">What Are {service.title}?</h2>
+                        <p>{service.longDescription}</p>
+                    </div>
+
+                    <div>
+                        <h3 className="font-headline text-2xl">What You'll Get</h3>
+                        <ul className="list-none p-0 space-y-3">
+                            {service.whatYoullGet.map((item, index) => (
+                                <li key={index} className="flex items-start gap-3">
+                                    <div className="h-5 w-5 text-primary shrink-0 mt-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+                                    </div>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 className="font-headline text-2xl">Ideal for:</h3>
+                        <div className="flex flex-wrap gap-2">
+                            {service.idealFor.map((item, index) => (
+                                <Badge key={index} variant="secondary" className="text-sm font-normal">{item}</Badge>
+                            ))}
+                        </div>
+                    </div>
+                 </div>
+            </div>
+
+             {/* Right Column */}
+            <div className="lg:col-span-1 space-y-8">
+                 <div className="sticky top-28">
+                    <Card className="bg-muted/50 border-primary/20 shadow-lg">
+                        <CardHeader>
+                            <CardTitle className="font-headline text-2xl text-primary">Why Choose Kashi?</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <ul className="space-y-4">
+                                {whyChooseUsReasons.map((reason, index) => {
+                                    const Icon = serviceIcons[reason.icon as keyof typeof serviceIcons];
+                                    return (
+                                    <li key={index} className="flex items-start gap-3">
+                                        <div className="h-5 w-5 text-green-500 shrink-0 mt-1">
+                                            <Icon className="w-5 h-5" />
+                                        </div>
+                                        <span>{reason.text}</span>
+                                    </li>
+                                    )
+                                })}
+                            </ul>
+                        </CardContent>
+                    </Card>
+                    <Button asChild size="lg" className="w-full mt-6 bg-accent hover:bg-accent/90 text-accent-foreground text-lg py-7">
+                        <Link href={`/order?service=${service.slug}`}>
+                            <ShoppingCart className="mr-2 h-5 w-5" />
+                            Order This Service
+                        </Link>
+                    </Button>
+                </div>
+            </div>
+        </div>
+      </div>
+
+        {/* Examples Section */}
+        <section className="py-16 md:py-24 bg-muted/20">
+            <div className="container">
+                <div className="text-center mb-12">
+                    <h2 className="font-headline text-3xl md:text-4xl font-bold">Visualizing Excellence: A Glimpse of Our Work</h2>
+                    <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
+                        Here are a few examples showcasing the quality and precision we bring to our {service.title}.
+                    </p>
+                </div>
+                <div className="relative overflow-hidden space-y-8">
+                    {/* First row - original direction */}
+                    <div className="flex gap-8 animate-infinite-scroll hover:pause">
+                        {/* Show actual examples from the service - no duplicates */}
+                        {service.examples.map((example, index) => (
+                            <div 
+                                key={`example-${index}`} 
+                                className="group relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-[350px] h-[350px] cursor-crosshair"
+                                onMouseMove={(e) => {
+                                    const rect = e.currentTarget.getBoundingClientRect();
+                                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                                    const img = e.currentTarget.querySelector('img') as HTMLImageElement;
+                                    if (img) {
+                                        img.style.transformOrigin = `${x}% ${y}%`;
+                                    }
+                                }}
+                            >
+                                <Image
+                                    src={example.image}
+                                    alt={example.title}
+                                    width={350}
+                                    height={350}
+                                    className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-150"
+                                    data-ai-hint={example.hint}
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100 group-hover:opacity-30 transition-opacity duration-300" />
+                                <div className="absolute bottom-0 left-0 p-4 group-hover:opacity-0 transition-opacity duration-300">
+                                    <h3 className="text-white font-semibold text-lg">{example.title}</h3>
+                                </div>
+                                {/* Custom cursor indicator */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                    <div className="absolute top-2 right-2 bg-white/20 backdrop-blur-sm rounded-full p-2">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
+                                            <circle cx="11" cy="11" r="8"/>
+                                            <path d="m21 21-4.35-4.35"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    
+                    {/* Second row - reverse direction with different images */}
+                    <div className="flex gap-8 animate-infinite-scroll-reverse hover:pause">
+                        {service.secondRowExamples ? service.secondRowExamples.map((example, index) => (
+                            <div 
+                                key={`second-row-${index}`} 
+                                className="group relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-[350px] h-[350px] cursor-crosshair"
+                                onMouseMove={(e) => {
+                                    const rect = e.currentTarget.getBoundingClientRect();
+                                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                                    const img = e.currentTarget.querySelector('img') as HTMLImageElement;
+                                    if (img) {
+                                        img.style.transformOrigin = `${x}% ${y}%`;
+                                    }
+                                }}
+                            >
+                                <Image
+                                    src={example.image}
+                                    alt={example.title}
+                                    width={350}
+                                    height={350}
+                                    className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-150"
+                                    data-ai-hint={example.hint}
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100 group-hover:opacity-30 transition-opacity duration-300" />
+                                <div className="absolute bottom-0 left-0 p-4 group-hover:opacity-0 transition-opacity duration-300">
+                                    <h3 className="text-white font-semibold text-lg">{example.title}</h3>
+                                </div>
+                                {/* Custom cursor indicator */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                    <div className="absolute top-2 right-2 bg-white/20 backdrop-blur-sm rounded-full p-2">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
+                                            <circle cx="11" cy="11" r="8"/>
+                                            <path d="m21 21-4.35-4.35"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        )) : null}
+                        {/* Duplicate for seamless infinite scroll */}
+                        {service.secondRowExamples ? service.secondRowExamples.map((example, index) => (
+                            <div 
+                                key={`second-row-duplicate-${index}`} 
+                                className="group relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-[350px] h-[350px] cursor-crosshair"
+                                onMouseMove={(e) => {
+                                    const rect = e.currentTarget.getBoundingClientRect();
+                                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                                    const img = e.currentTarget.querySelector('img') as HTMLImageElement;
+                                    if (img) {
+                                        img.style.transformOrigin = `${x}% ${y}%`;
+                                    }
+                                }}
+                            >
+                                <Image
+                                    src={example.image}
+                                    alt={example.title}
+                                    width={350}
+                                    height={350}
+                                    className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-150"
+                                    data-ai-hint={example.hint}
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100 group-hover:opacity-30 transition-opacity duration-300" />
+                                <div className="absolute bottom-0 left-0 p-4 group-hover:opacity-0 transition-opacity duration-300">
+                                    <h3 className="text-white font-semibold text-lg">{example.title}</h3>
+                                </div>
+                                {/* Custom cursor indicator */}
+                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                    <div className="absolute top-2 right-2 bg-white/20 backdrop-blur-sm rounded-full p-2">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
+                                            <circle cx="11" cy="11" r="8"/>
+                                            <path d="m21 21-4.35-4.35"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        )) : null}
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+      {/* Key Features Section */}
+      <section className="py-16 md:py-24 bg-muted/40">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="font-headline text-3xl md:text-4xl font-bold">Key Features</h2>
+            <p className="mt-4 max-w-2xl mx-auto text-muted-foreground">
+              Discover the advantages of our {service.title}.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {service.keyFeatures.map((feature) => {
+                const Icon = serviceIcons[feature.icon as keyof typeof serviceIcons];
+                return (
+                <Card key={feature.title} className="text-center p-6 flex flex-col items-center">
+                    <div className="flex-shrink-0 flex justify-center items-center h-16 w-16 rounded-full bg-primary/10 mb-4">
+                        <Icon className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="font-headline text-xl font-semibold mb-2">{feature.title}</h3>
+                    <p className="text-muted-foreground text-sm flex-grow">{feature.description}</p>
+                </Card>
+                )
+            })}
+          </div>
+        </div>
+      </section>
+
+       {service.modelSrc && (
+        <section className="py-12 md:py-20 bg-muted">
+            <div className="container">
+                <div className="max-w-4xl mx-auto text-center">
+                    <h2 className="font-headline text-3xl font-bold">Interactive 3D Model</h2>
+                    <p className="text-muted-foreground mt-2 mb-8">
+                        Rotate and inspect a sample of our high-quality 3D modeling work.
+                    </p>
+                </div>
+                 <div className="w-full h-96 max-w-4xl mx-auto rounded-lg shadow-xl overflow-hidden">
+                    <model-viewer
+                        src={service.modelSrc}
+                        alt={`A 3D model for ${service.title}`}
+                        camera-controls
+                        auto-rotate
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            backgroundColor: 'hsl(var(--background))',
+                            backgroundImage: `
+                                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                                linear-gradient(to right, var(--grid-color) 1px, transparent 1px)
+                            `,
+                            backgroundSize: '20px 20px',
+                            ...{'--grid-color': 'hsl(var(--border))'} as React.CSSProperties
+                        } as React.CSSProperties & Record<string, any>}
+                    />
+                 </div>
+            </div>
+        </section>
+      )}
+
+      {/* FAQ Section */}
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container max-w-4xl">
+            <div className="text-center mb-12">
+              <h2 className="font-headline text-3xl md:text-4xl font-bold">Frequently Asked Questions</h2>
+              <p className="mt-4 text-muted-foreground">
+                Find answers to common questions about our {service.title}.
+              </p>
+            </div>
+            <div className="space-y-8">
+              {service.faqs.map((faq, index) => (
+                <div key={index} className="p-6 border rounded-lg bg-muted/50">
+                  <h3 className="text-lg font-semibold mb-2">{faq.question}</h3>
+                  <p className="text-base text-muted-foreground">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+        </div>
+      </section>
+
+       {/* Next/Prev Service Navigation */}
+      <section className="border-t">
+        <div className="container py-8">
+          <div className="flex flex-col md:flex-row md:justify-between items-center gap-4">
+            <Button asChild variant="outline" className="w-full md:w-auto">
+              <Link href={`/services/${prevSlug}`}>
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                {prevService.title}
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="w-full md:w-auto">
+              <Link href={`/services/${nextSlug}`}>
+                {nextService.title}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+    </div>
+    </>
+  );
+}
