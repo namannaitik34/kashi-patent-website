@@ -41,7 +41,7 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
           }
         `
       }} />
-      <div className="bg-background relative pt-20">
+      <div className="bg-background relative">
         {/* Hero Section */}
       <section className="relative h-[60vh] w-full bg-black flex items-center justify-center">
         <Image

@@ -159,7 +159,7 @@ export default function OrderPage() {
                                     name="projectTitle"
                                     render={({ field }) => (
                                         <FormItem>
-                                        <FormLabel>Innovation name (Reference/matter no.)</FormLabel>
+                                        <FormLabel>Reference/matter number</FormLabel>
                                         <FormControl>
                                             <Input placeholder="e.g., Automated Personal Drone" {...field} />
                                         </FormControl>
@@ -212,7 +212,7 @@ export default function OrderPage() {
                                 Submitting Securely...
                                 </>
                             ) : (
-                                'Submit Project for Review'
+                                'Submit Project Details'
                             )}
                             </Button>
                         </form>
