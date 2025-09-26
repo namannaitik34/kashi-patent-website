@@ -11,8 +11,13 @@ import Newsletter from '@/components/newsletter';
 import FadeIn from '@/components/fade-in';
 
 export const metadata: Metadata = {
-  title: 'Kashi Patent - Premium Patent Design',
+  title: 'Kashi Patent- Drawings & Designing Services',
   description: 'Premium patent design and drawing services.',
+  icons: {
+    icon: '/images/logo.svg',
+    shortcut: '/images/logo.svg',
+    apple: '/images/logo.svg',
+  },
 };
 
 export default function RootLayout({
