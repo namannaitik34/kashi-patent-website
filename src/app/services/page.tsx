@@ -26,12 +26,12 @@ export default function ServicesPage() {
         {services.map((service) => (
           <Card key={service.slug} className="group/card flex flex-col overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
             <div className="relative">
-              <Link href={`/services/${service.slug}`} className="block relative h-56 w-full overflow-hidden">
+              <Link href={`/services/${service.slug}`} className="block relative h-[360px] w-[360px] mx-auto overflow-hidden bg-gray-50 rounded-lg">
                 <Image
                   src={service.image}
                   alt={service.title}
                   fill
-                  className="object-cover transition-transform duration-500 ease-in-out group-hover/card:scale-105"
+                  className="object-contain transition-transform duration-500 ease-in-out group-hover/card:scale-105"
                   data-ai-hint={service.imageHint}
                 />
               </Link>

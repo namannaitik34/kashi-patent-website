@@ -31,45 +31,60 @@ import { useRef } from 'react';
 import HeroBackground from '@/components/hero-background';
 
 const workSamples = [
+
   {
-    title: 'Drone Delivery System',
+    title: 'An ergonomic patio tool featuring an integrated LED illumination system.',
     category: 'Utility Patent',
-    image: 'https://picsum.photos/360/360?random=1',
-    hint: 'technical drawing',
-    description: 'Detailed mechanical drawings for a novel autonomous drone delivery mechanism, ensuring all functional aspects were clearly illustrated for the patent application.',
+    image: '/images/utility1.png',
+    hint: 'product design',
+    description: 'A full set of illustrations capturing the unique aesthetic and ornamental features of a new ergonomic chair, crucial for securing a design patent.',
   },
   {
     title: 'Ergonomic Office Chair',
-    category: 'Design Patent',
-    image: 'https://picsum.photos/360/360?random=2',
+    category: 'Utility Patent',
+    image: '/images/utility2.png',
     hint: 'product design',
     description: 'A full set of illustrations capturing the unique aesthetic and ornamental features of a new ergonomic chair, crucial for securing a design patent.',
   },
   {
     title: 'Smart Medical Device',
-    category: '3D Model',
-    image: 'https://picsum.photos/360/360?random=3',
+    category: 'Utility Patent',
+    image: '/images/utility3.png',
     hint: '3d model',
     description: 'Created a high-fidelity 3D model from 2D sketches, which was used for both patent illustrations and investor presentations.',
   },
   {
     title: 'Brand Logo for "Innovate"',
-    category: 'Trademark',
-    image: 'https://picsum.photos/360/360?random=4',
+    category: 'Design Patent',
+    image: '/images/design1.png',
     hint: 'company logo',
     description: 'Developed a clean and distinctive logo, delivered in formats compliant with USPTO, EPO, WIPO, PCT, JPO, CNIPA, and other global patent offices requirements for trademark registration.',
   },
   {
     title: 'Robotic Arm Mechanism',
     category: 'Utility Patent',
-    image: 'https://picsum.photos/360/360?random=5',
+    image: '/images/utility2.png',
     hint: 'robotic arm drawing',
     description: 'Complex drawings detailing the joints and actuators of a multi-axis robotic arm.',
   },
   {
     title: 'Consumer Electronics Casing',
     category: 'Design Patent',
-    image: 'https://picsum.photos/360/360?random=6',
+    image: '/images/design3.png',
+    hint: 'electronics casing',
+    description: 'Sleek, modern design illustrations for a new handheld electronic device.',
+  },
+  {
+    title: 'Consumer Electronics Casing',
+    category: 'Technical Patent',
+    image: '/images/technical1.png',
+    hint: 'electronics casing',
+    description: 'Sleek, modern design illustrations for a new handheld electronic device.',
+  },
+  {
+    title: 'Consumer Electronics Casing',
+    category: 'Technical Patent',
+    image: '/images/technical2.png',
     hint: 'electronics casing',
     description: 'Sleek, modern design illustrations for a new handheld electronic device.',
   },
@@ -196,33 +211,33 @@ const coreValues = [
   }
 ];
 
-const showcaseImages = Array.from({ length: 80 }, (_, i) => ({
-  src: `https://picsum.photos/360/360?random=${21 + i}`,
-  hint: `design showcase ${i + 1}`,
-}));
+// const showcaseImages = Array.from({ length: 80 }, (_, i) => ({
+//   src: `https://picsum.photos/360/360?random=${21 + i}`,
+//   hint: `design showcase ${i + 1}`,
+// }));
 
-const ShowcaseImage = ({ src, hint, yOffset = '-10%' }: { src: string, hint: string, yOffset?: string }) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [yOffset, '10%']);
+// const ShowcaseImage = ({ src, hint, yOffset = '-10%' }: { src: string, hint: string, yOffset?: string }) => {
+//   const ref = useRef(null);
+//   const { scrollYProgress } = useScroll({
+//     target: ref,
+//     offset: ['start end', 'end start'],
+//   });
+//   const y = useTransform(scrollYProgress, [0, 1], [yOffset, '10%']);
 
-  return (
-    <div ref={ref} className="relative overflow-hidden aspect-[2/3]">
-      <motion.div style={{ y }} className="absolute inset-0">
-        <Image
-          src={src}
-          alt={hint}
-          fill
-          className="object-cover"
-          data-ai-hint={hint}
-        />
-      </motion.div>
-    </div>
-  );
-};
+//   return (
+//     <div ref={ref} className="relative overflow-hidden aspect-[2/3]">
+//       <motion.div style={{ y }} className="absolute inset-0">
+//         <Image
+//           src={src}
+//           alt={hint}
+//           fill
+//           className="object-cover"
+//           data-ai-hint={hint}
+//         />
+//       </motion.div>
+//     </div>
+//   );
+// };
 
 
 export default function Home() {
@@ -241,7 +256,7 @@ export default function Home() {
           </h1>
 
           <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-muted-foreground">
-          Transforming innovative ideas into patent drawings compliant with USPTO, EPO, WIPO , PCT, JPO, CNIPA, and other global patent offices — with unmatched accuracy and artistry. </p>
+          Transforming innovative ideas into patent drawings compliant with USPTO, EPO, WIPO, PCT, JPO, CNIPA, and other global patent offices — with unmatched accuracy and artistry. </p>
           <p className="mt-6 text-accent font-semibold text-2xl animate-pulse">Get 15% OFF on your first order! Limited Time Offer!</p>
           <Button asChild size="lg" className="mt-8 bg-accent hover:bg-accent/90 text-accent-foreground">
             <Link href="/order">Order Now</Link>
@@ -384,12 +399,12 @@ export default function Home() {
               {services.map((service) => (
                 <Card key={service.slug} className="group/service flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                   <CardHeader className="p-0 relative">
-                    <Link href={`/services/${service.slug}`} className="block relative h-56 w-full">
+                    <Link href={`/services/${service.slug}`} className="block relative h-[360px] w-[360px] mx-auto bg-gray-50 rounded-lg overflow-hidden">
                       <Image
                         src={service.image}
                         alt={service.title}
                         fill
-                        className="object-cover transition-transform duration-300 group-hover/service:scale-105"
+                        className="object-contain transition-transform duration-300 group-hover/service:scale-105"
                         data-ai-hint={service.imageHint}
                       />
                       <Badge className="absolute top-4 right-4 z-10" variant="default">
