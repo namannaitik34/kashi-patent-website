@@ -42,7 +42,7 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
         `
       }} />
       <div className="bg-background relative">
-        {/* Hero Section */}
+        {/* landing page */}
       <section className="relative h-[60vh] w-full bg-black flex items-center justify-center">
         <Image
             src={service.image}
@@ -170,7 +170,7 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
                         {service.examples.map((example, index) => (
                             <div 
                                 key={`example-${index}`} 
-                                className="group relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-[350px] h-[350px] cursor-crosshair"
+                                className="group relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-[250px] md:w-[350px] h-[250px] md:h-[350px] cursor-crosshair"
                                 onMouseMove={(e) => {
                                     const rect = e.currentTarget.getBoundingClientRect();
                                     const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -211,7 +211,7 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
                         {service.secondRowExamples ? service.secondRowExamples.map((example, index) => (
                             <div 
                                 key={`second-row-${index}`} 
-                                className="group relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-[350px] h-[350px] cursor-crosshair"
+                                className="group relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-[250px] md:w-[350px] h-[250px] md:h-[350px] cursor-crosshair"
                                 onMouseMove={(e) => {
                                     const rect = e.currentTarget.getBoundingClientRect();
                                     const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -249,7 +249,7 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
                         {service.secondRowExamples ? service.secondRowExamples.map((example, index) => (
                             <div 
                                 key={`second-row-duplicate-${index}`} 
-                                className="group relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-[350px] h-[350px] cursor-crosshair"
+                                className="group relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-[250px] md:w-[350px] h-[250px] md:h-[350px] cursor-crosshair"
                                 onMouseMove={(e) => {
                                     const rect = e.currentTarget.getBoundingClientRect();
                                     const x = ((e.clientX - rect.left) / rect.width) * 100;

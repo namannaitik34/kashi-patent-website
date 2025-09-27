@@ -266,7 +266,7 @@ export default function Home() {
 
       {/*Understanding Patent Drawings Section*/}
       <FadeIn>
-        <section id="design-types" className="py-20 md:py-28 bg-muted/40">
+        <section id="design-types" className="py-12 md:py-20 lg:py-28 bg-muted/40">
           <div className="container mx-auto">
             <div className="text-center mb-16">
               <h2 className="font-headline text-4xl font-bold">Protect Every Aspect of Your Invention</h2>
@@ -348,7 +348,7 @@ export default function Home() {
 
       {/*Work Samples Section*/}
       <FadeIn>
-        <section id="work" className="py-20 bg-background">
+        <section id="work" className="py-12 md:py-20 bg-background">
           <div className="container mx-auto">
             <div className="text-center mb-12">
               <h2 className="font-headline text-4xl font-bold">Our Work Portfolio</h2>
@@ -360,7 +360,7 @@ export default function Home() {
           <div className="flex overflow-x-auto space-x-8 pb-4 scrollbar-hide">
             <div className="flex-none pl-8" />
             {workSamples.map((sample, index) => (
-              <div key={index} className="group relative overflow-hidden rounded-lg shadow-lg flex-none w-96">
+              <div key={index} className="group relative overflow-hidden rounded-lg shadow-lg flex-none w-72 md:w-96">
                 <Image
                   src={sample.image}
                   alt={sample.title}
@@ -386,7 +386,7 @@ export default function Home() {
 
       {/* Services Section */}
       <FadeIn>
-        <section id="services" className="py-20 bg-muted/40">
+        <section id="services" className="py-12 md:py-20 bg-muted/40">
           <div className="container mx-auto">
             <div className="text-center mb-12">
               <h2 className="font-headline text-4xl font-bold">Our Services</h2>
@@ -399,7 +399,7 @@ export default function Home() {
               {services.map((service) => (
                 <Card key={service.slug} className="group/service flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                   <CardHeader className="p-0 relative">
-                    <Link href={`/services/${service.slug}`} className="block relative h-[360px] w-[360px] mx-auto bg-gray-50 rounded-lg overflow-hidden">
+                    <Link href={`/services/${service.slug}`} className="block relative h-[250px] md:h-[360px] w-[250px] md:w-[360px] mx-auto bg-gray-50 rounded-lg overflow-hidden">
                       <Image
                         src={service.image}
                         alt={service.title}
@@ -440,7 +440,7 @@ export default function Home() {
 
       {/* About Section */}
       <FadeIn>
-        <section id="about" className="py-20 md:py-32 bg-background text-foreground">
+        <section id="about" className="py-12 md:py-20 lg:py-32 bg-background text-foreground">
           <div className="container mx-auto">
             <div className="text-center">
               <p className="text-base font-semibold text-primary uppercase tracking-wider">About Kashi Patent</p>
@@ -492,7 +492,7 @@ export default function Home() {
 
       {/* Why Choose Us Section */}
       <FadeIn>
-        <section id="why-choose-us" className="py-20 relative bg-background">
+        <section id="why-choose-us" className="py-12 md:py-20 relative bg-background">
           <div className="absolute inset-0">
             <Image
               src="https://picsum.photos/1920/1080?random=20"
@@ -532,7 +532,7 @@ export default function Home() {
 
       {/* How It Works Section */}
       <FadeIn>
-        <section id="how-it-works" className="py-20 bg-muted/40">
+        <section id="how-it-works" className="py-12 md:py-20 bg-muted/40">
           <div className="container mx-auto">
             <div className="text-center mb-16">
               <h2 className="font-headline text-4xl font-bold">How It Works</h2>
@@ -582,7 +582,7 @@ export default function Home() {
 
       {/* Why Patents Matter Section */}
       <FadeIn>
-        <section id="why-patents" className="py-20 bg-background">
+        <section id="why-patents" className="py-12 md:py-20 bg-background">
           <div className="container mx-auto max-w-5xl">
             <div className="text-center mb-12">
               <h2 className="font-headline text-4xl font-bold">Why Patents Matter</h2>
@@ -624,7 +624,7 @@ export default function Home() {
 
       {/* FAQ Section */}
       <FadeIn>
-        <section id="faq" className="py-20 bg-muted/40">
+        <section id="faq" className="py-12 md:py-20 bg-muted/40">
           <div className="container mx-auto max-w-4xl">
             <div className="text-center mb-12">
               <h2 className="font-headline text-4xl font-bold">Frequently Asked Questions</h2>
