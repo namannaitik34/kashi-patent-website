@@ -163,9 +163,10 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
                         Here are a few examples showcasing the quality and precision we bring to our {service.title}.
                     </p>
                 </div>
-                <div className="relative overflow-hidden space-y-8">
+                <div className="relative space-y-8">
                     {/* First row - original direction */}
-                    <div className="flex gap-8 animate-infinite-scroll hover:pause">
+                    <div className="overflow-x-auto scrollbar-hide">
+                        <div className="flex gap-8 animate-infinite-scroll hover:pause" style={{ width: 'max-content' }}>
                         {/* Show actual examples from the service - no duplicates */}
                         {service.examples.map((example, index) => (
                             <div 
@@ -204,10 +205,12 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
                                 </div>
                             </div>
                         ))}
+                        </div>
                     </div>
                     
                     {/* Second row - reverse direction with different images */}
-                    <div className="flex gap-8 animate-infinite-scroll-reverse hover:pause">
+                    <div className="overflow-x-auto scrollbar-hide">
+                        <div className="flex gap-8 animate-infinite-scroll-reverse hover:pause" style={{ width: 'max-content' }}>
                         {service.secondRowExamples ? service.secondRowExamples.map((example, index) => (
                             <div 
                                 key={`second-row-${index}`} 
@@ -283,6 +286,7 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
                                 </div>
                             </div>
                         )) : null}
+                        </div>
                     </div>
                 </div>
             </div>

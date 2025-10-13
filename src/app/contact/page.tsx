@@ -56,7 +56,7 @@ export default function ContactPage() {
             </div>
             <div>
               <h3 className="text-xl font-semibold">Office</h3>
-              <p className="text-muted-foreground">123 Patent Lane, Innovation City, 12345</p>
+              <p className="text-muted-foreground">Levana Cyber Heights, Lucknow, Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010</p>
             </div>
           </div>
         </div>

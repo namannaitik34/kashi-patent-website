@@ -54,7 +54,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2 ">
                 <MapPin className="w-4 h-4 mt-1 shrink-0" />
-                <span>123 Patent Lane, Innovation City, 12345</span>
+                <span>Levana Cyber Heights, Lucknow, Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4shrink-0" />
