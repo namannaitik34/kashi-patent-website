@@ -84,17 +84,17 @@ export const services: Service[] = [
     pricePer: 'drawing',
     examples: [
         {
-            title: 'Utility Design',
+            title: 'Sample',
             image: '/images/utility/1.svg',
             hint: 'gear assembly',
         },
         {
-            title: 'Sample example',
+            title: 'Sample',
             image: '/images/utility/2.svg',
             hint: 'medical device',
         },
         {
-            title: 'Sample example',
+            title: 'Sample',
             image: '/images/utility/3.svg',
             hint: 'software flowchart',
         },
@@ -163,97 +163,93 @@ export const services: Service[] = [
     pricePer: 'drawing',
     examples: [
         {
-            title: 'Headset - Angle 1',
+            title: 'Sample',
             image: '/images/headset/1.svg',
             hint: 'headset angle 1',
         },
         {
-            title: 'Headset - Angle 2',
+            title: 'Sample',
             image: '/images/headset/2.svg',
             hint: 'headset angle 2',
         },
         {
-            title: 'Headset - Angle 3',
+            title: 'Sample',
             image: '/images/headset/3.svg',
             hint: 'headset angle 3',
         },
         {
-            title: 'Headset - Angle 4',
+            title: 'Sample',
             image: '/images/headset/4.svg',
             hint: 'headset angle 4',
         },
         {
-            title: 'Headset - Angle 5',
+            title: 'Sample',
             image: '/images/headset/5.svg',
             hint: 'headset angle 5',
         },
         {
-            title: 'Headset - Angle 6',
+            title: 'Sample',
             image: '/images/headset/6.svg',
             hint: 'headset angle 6',
         },
         {
-            title: 'Headset - Angle 7',
+            title: 'Sample',
             image: '/images/headset/7.svg',
             hint: 'headset angle 7',
         },
         {
-            title: 'Headset - Angle 8',
+            title: 'Sample',
             image: '/images/headset/8.svg',
             hint: 'headset angle 8',
         },
         {
-            title: 'Headset - Angle 9',
+            title: 'Sample',
             image: '/images/headset/9.svg',
             hint: 'headset angle 9',
         },
         {
-            title: 'Headset - Angle 10',
+            title: 'Sample',
             image: '/images/headset/10.svg',
             hint: 'headset angle 10',
         },
     ],
     secondRowExamples: [
         {
-            title: "women's wear - Angle 1",
-            image: '/images/dress/11.svg',
+            title: "Sample",
+            image: '/images/dress/1.svg',
             hint: "women's wear angle 1",
         },
         {
-            title: "women's wear - Angle 2",
-            image: '/images/dress/12.svg',
+            title: "Sample",
+            image: '/images/dress/2.svg',
             hint: "women's wear angle 2",
         },
         {
-            title: "women's wear - Angle 3",
-            image: '/images/dress/13.svg',
+            title: "Sample",
+            image: '/images/dress/3.svg',
             hint: "women's wear angle 3",
         },
         {
-            title: "women's wear - Angle 4",
-            image: '/images/dress/14.svg',
+            title: "Sample",
+            image: '/images/dress/4.svg',
             hint: "women's wear angle 4",
         },
         {
-            title: "women's wear - Angle 5",
-            image: '/images/dress/15.svg',
+            title: "Sample",
+            image: '/images/dress/5.svg',
             hint: "women's wear angle 5",
         },
         {
-            title: "women's wear - Angle 6",
-            image: '/images/dress/16.svg',
+            title: "Sample",
+            image: '/images/dress/6.svg',
             hint: "women's wear angle 6",
         },
         {
-            title: "women's wear - Angle 7",
-            image: '/images/dress/17.svg',
+            title: "Sample",
+            image: '/images/dress/7.svg',
             hint: "women's wear angle 7",
         },
-        {
-            title: "women's wear - Angle 8",
-            image: '/images/dress/18.svg',
-            hint: "women's wear angle 8",
-        },
+
     ],
     keyFeatures: [
       {
