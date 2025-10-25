@@ -289,117 +289,66 @@ export const services: Service[] = [
     ]
   },
   {
-    slug: 'technical-patent-drawing-services',
-    title: 'Technical Patent Drawing Services',
-    description: 'Detailed technical drawings for manufacturing and engineering purposes.',
-    longDescription: "Beyond patents, we offer professional engineering drawings (blueprints) for manufacturing and prototyping. Our services include creating detailed schematics, assembly drawings, and component specifications with precise dimensions and tolerances.",
+    slug: 'trademark-patent-drawing-services',
+    title: 'Trademark Patent Drawing Services',
+    description: 'Professional trademark illustrations and visual representations for brand protection.',
+    longDescription: "Protect your brand identity with our specialized Trademark Drawing services. We create precise, clear illustrations of logos, symbols, word marks, and design marks that meet all USPTO and international trademark office requirements. Our trademark drawings help ensure your brand receives the strongest possible legal protection.",
     whatYoullGet: [
-        'Manufacturing-Ready Blueprints: Comprehensive technical drawings with precise dimensions, tolerances, and specifications for production',
-        'Geometric Dimensioning and Tolerancing (GD&T): Professional dimensioning system ensuring parts fit and function correctly',
-        'Multiple View Presentations: Orthographic projections, sectional views, auxiliary views, and detail views as required',
-        'Bill of Materials (BOM) Integration: Complete parts lists with specifications, materials, and quantities',
-        'Assembly & Exploded Views: Clear illustrations showing how components fit together for manufacturing and assembly',
-        'Industry Standard Compliance: Drawings prepared according to ASME Y14.5, ISO 1101, and other international engineering standards',
-        'Production-Ready Formats: Delivered in CAD-compatible formats (DWG, DXF, PDF) suitable for CNC programming and manufacturing',
-        'Quality Assurance: Thoroughly reviewed drawings to eliminate manufacturing errors and ensure producibility',
+        'USPTO Compliant Drawings: Trademark illustrations prepared in strict accordance with USPTO TMEP guidelines and international trademark office standards',
+        'Multiple Format Options: Clean black and white line drawings, stylized representations, and color specimens as required by trademark law',
+        'Word Mark Visualizations: Professional typography and lettering for distinctive word marks and stylized text',
+        'Design Mark Illustrations: Precise reproductions of logos, symbols, emblems, and graphic design elements',
+        'Specimen Preparations: Proper formatting of trademark drawings for use-in-commerce evidence and registration applications',
+        'International Compliance: Drawings prepared for Madrid Protocol filings and global trademark protection strategies',
+        'Digital Vector Formats: Scalable illustrations delivered in trademark office-acceptable formats (EPS, PDF, SVG)',
+        'Revision Support: Multiple rounds of refinement to ensure perfect representation of your brand elements',
     ],
     idealFor: [
-        'Manufacturing Engineers requiring production blueprints',
-        'Product Development Teams creating prototypes',
-        'Startups transitioning from concept to production',
-        'Machine Shops requiring precise fabrication drawings',
-        'CNC Programmers needing CAD-ready technical drawings',
+        'Entrepreneurs launching new brands and logos',
+        'Small Businesses protecting their brand identity',
+        'Marketing Agencies filing trademark applications for clients',
+        'Legal Professionals requiring precise trademark documentation',
+        'E-commerce Companies securing online brand protection',
     ],
-    image: '/images/technical/3.svg',
-    imageHint: 'engineering plan',
-    price: 34,
-    pricePer: 'figure',
-    examples: [
-        {
-            title: 'Sample image',
-            image: '/images/technical/1.svg',
-            hint: 'technical blueprint',
-        },
-        {
-            title: 'Sample example',
-            image: '/images/technical/2.svg',
-            hint: 'engine exploded',
-        },
-        {
-            title: 'Sample image',
-            image: '/images/technical/3.svg',
-            hint: 'architectural plan',
-        },
-        {
-            title: 'Sample example',
-            image: '/images/technical/4.svg',
-            hint: 'assembly guide',
-        },
-        {
-            title: '',
-            image: '/images/technical/11.svg',
-            hint: 'injection mold',
-        },
-        {
-            title: 'Sample design',
-            image: '/images/technical/12.svg',
-            hint: 'pcb layout',
-        },
-        {
-            title: 'Sample image',
-            image: '/images/technical/13.svg',
-            hint: 'sheet metal',
-        },
-        {
-            title: 'Sample design',
-            image: '/images/technical/8.svg',
-            hint: 'mechanical part',
-        },
-        {
-            title: 'Sample design',
-            image: '/images/technical/9.svg',
-            hint: 'wiring diagram',
-        },
-        {
-            title: 'Sample design',
-            image: '/images/technical/10.svg',
-            hint: 'piping instrumentation',
-        },
-    ],
+    image: '/images/trademark/main.svg',
+    imageHint: 'trademark symbol',
+    price: 25,
+    pricePer: 'mark',
+    examples: [],
     keyFeatures: [
       {
         icon: 'Scale',
-        title: 'Precision Dimensions',
-        description: 'Drawings include exact measurements and tolerances required for manufacturing.',
+        title: 'Legal Precision',
+        description: 'Drawings meet exact trademark office specifications for successful registration.',
       },
       {
-        icon: 'BrainCircuit',
-        title: 'Assembly Instructions',
-        description: 'Exploded and sectional views make assembly clear and straightforward.',
+        icon: 'Award',
+        title: 'Brand Protection',
+        description: 'Professional illustrations that strengthen your trademark application and brand defense.',
       },
       {
         icon: 'FileCheck2',
-        title: 'Industry Standards',
-        description: 'All drawings conform to industry standards like ASME/ISO for universal clarity.',
+        title: 'Global Standards',
+        description: 'Compliant with USPTO, EUIPO, WIPO and international trademark office requirements.',
       },
       {
         icon: 'Users',
-        title: 'BOM & Part Lists',
-        description: 'We can integrate or create a Bill of Materials (BOM) for complete production planning.',
+        title: 'Multi-Format Delivery',
+        description: 'Receive your trademark drawings in all required formats for various filing needs.',
       },
     ],
     faqs: [
         {
-            question: 'Are technical drawings the same as patent drawings?',
-            answer: 'No. Patent drawings are for legal protection and follow patent office rules, focusing on showing the invention. Technical drawings (or blueprints) are for manufacturing and include precise dimensions, materials, and tolerances.'
+            question: 'What is the difference between trademark drawings and regular logo design?',
+            answer: 'Trademark drawings are legal documents that must meet specific government standards for clarity, format, and presentation. They are used for official trademark registration, unlike regular marketing logos.'
         },
         {
-            question: 'What is GD&T and why is it important?',
-            answer: 'Geometric Dimensioning and Tolerancing (GD&T) is a symbolic language used on engineering drawings to define the allowable variation of features. It ensures parts fit together and function correctly.'
+            question: 'Do I need different drawings for word marks vs. design marks?',
+            answer: 'Yes. Word marks require specific typography representations, while design marks need precise illustrations of logos or symbols. We create the appropriate drawing type based on your trademark application needs.'
         },
         {
-            question: 'Can you create a technical drawing from a simple sketch?',
-            answer: 'Absolutely. We can take your concept sketches, photos, or existing prototypes and turn them into professional, manufacturing-ready technical drawings.'
+            question: 'Can you help with international trademark filings?',
+            answer: 'Absolutely. Our trademark drawings are prepared to meet international standards and can be used for Madrid Protocol filings and applications in multiple countries.'
         },
     ]
   },
