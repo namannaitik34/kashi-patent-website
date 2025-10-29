@@ -78,25 +78,137 @@ export const services: Service[] = [
         'Medical Device Innovators with new healthcare solutions',
         'Manufacturing Companies with production improvements',
     ],
-    image: '/images/utility/3.svg',
+    image: '/images/utility/utility_1.1.svg',
     imageHint: 'utility cover',
     price: 20,
     pricePer: 'drawing',
     examples: [
         {
             title: 'Sample',
-            image: '/images/utility/1.svg',
+            image: '/images/utility/utility_1.1.svg',
             hint: 'gear assembly',
         },
         {
             title: 'Sample',
-            image: '/images/utility/2.svg',
+            image: '/images/utility/utility_1.2.svg',
             hint: 'medical device',
         },
         {
             title: 'Sample',
-            image: '/images/utility/3.svg',
+            image: '/images/utility/utility_1.3.svg',
             hint: 'software flowchart',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_1.4.svg',
+            hint: 'software flowchart',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_1.5.svg',
+            hint: 'software flowchart',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_1.6.svg',
+            hint: 'software flowchart',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_1.7.svg',
+            hint: 'software flowchart',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_1.8.svg',
+            hint: 'software flowchart',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_1.9.svg',
+            hint: 'software flowchart',
+        },
+    ],
+    secondRowExamples: [
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.1.svg',
+            hint: 'mechanical component',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.2.svg',
+            hint: 'technical diagram',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.3.svg',
+            hint: 'assembly view',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.4.svg',
+            hint: 'system overview',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.5.svg',
+            hint: 'process flow',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.6.svg',
+            hint: 'detailed view',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.7.svg',
+            hint: 'cross section',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.8.svg',
+            hint: 'exploded view',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.9.svg',
+            hint: 'schematic diagram',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.10.svg',
+            hint: 'component layout',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.11.svg',
+            hint: 'functional diagram',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.12.svg',
+            hint: 'structural view',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.13.svg',
+            hint: 'operational flow',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.14.svg',
+            hint: 'design specification',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.15.svg',
+            hint: 'technical blueprint',
+        },
+        {
+            title: 'Sample',
+            image: '/images/utility/utility_2.16.svg',
+            hint: 'gear assembly alt',
         },
     ],
     keyFeatures: [

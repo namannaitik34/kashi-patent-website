@@ -154,7 +154,8 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
         </div>
       </div>
 
-        {/* Examples Section */}
+        {/* Examples Section - Only show if service has examples */}
+        {service.examples && service.examples.length > 0 && (
         <section className="py-16 md:py-24 bg-muted/20">
             <div className="container">
                 <div className="text-center mb-12">
@@ -291,6 +292,7 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
                 </div>
             </div>
         </section>
+        )}
       
       {/* Key Features Section */}
       <section className="py-16 md:py-24 bg-muted/40">
