@@ -422,7 +422,7 @@ export const services: Service[] = [
         'Legal Professionals requiring precise trademark documentation',
         'E-commerce Companies securing online brand protection',
     ],
-    image: '/images/trademark/main.svg',
+    image: '/images/trademark/trademark.png',
     imageHint: 'trademark symbol',
     price: 25,
     pricePer: 'mark',
