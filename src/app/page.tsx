@@ -161,49 +161,49 @@ const workSamples = [
   {
     title: 'Sample',
     category: 'Technical Patent',
-    image: '/images/technical/1.svg',
+    image: '/images/design/vaccum/1.svg',
     hint: 'electronics casing',
     description: 'Sleek, modern design illustrations for a new handheld electronic device.',
   },
   {
     title: 'Sample',
     category: 'Technical Patent',
-    image: '/images/technical/2.svg',
+    image: '/images/design/vaccum/2.svg',
     hint: 'electronics casing',
     description: 'Sleek, modern design illustrations for a new handheld electronic device.',
   },
   {
     title: 'Sample',
     category: 'Technical Patent',
-    image: '/images/technical/3.svg',
+    image: '/images/design/vaccum/3.svg',
     hint: 'electronics casing',
     description: 'Sleek, modern design illustrations for a new handheld electronic device.',
   },
   {
     title: 'Sample',
     category: 'Technical Patent',
-    image: '/images/technical/4.svg',
+    image: '/images/design/vaccum/4.svg',
     hint: 'electronics casing',
     description: 'Sleek, modern design illustrations for a new handheld electronic device.',
   },
   {
     title: 'Sample',
     category: 'Technical Patent',
-    image: '/images/technical/8.svg',
+    image: '/images/design/vaccum/5.svg',
     hint: 'electronics casing',
     description: 'Sleek, modern design illustrations for a new handheld electronic device.',
   },
   {
     title: 'Sample',
     category: 'Technical Patent',
-    image: '/images/technical/9.svg',
+    image: '/images/design/vaccum/6.svg',
     hint: 'electronics casing',
     description: 'Sleek, modern design illustrations for a new handheld electronic device.',
   },
    {
     title: 'Sample',
     category: 'Design Patent',
-    image: '/images/technical/10.svg',
+    image: '/images/design/sofa-design/1.svg',
     hint: 'electronics casing',
     description: 'Sleek, modern design illustrations for a new handheld electronic device.',
   },
@@ -485,6 +485,7 @@ export default function Home() {
                   alt={sample.title}
                   width={360}
                   height={360}
+                  unoptimized
                   className="object-cover w-full h-full aspect-square transition-transform duration-500 ease-in-out group-hover:scale-110"
                   data-ai-hint={sample.hint}
                 />
