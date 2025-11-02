@@ -155,11 +155,11 @@ export const services: Service[] = [
             image: '/images/utility/utility_2.5.svg',
             hint: 'process flow',
         },
-        {
-            title: 'Sample',
-            image: '/images/utility/utility_2.6.svg',
-            hint: 'detailed view',
-        },
+    {
+      title: 'Sample',
+      image: '/images/utility/utility_2.16.svg',
+      hint: 'detailed view',
+    },
         {
             title: 'Sample',
             image: '/images/utility/utility_2.7.svg',
@@ -422,7 +422,7 @@ export const services: Service[] = [
         'Legal Professionals requiring precise trademark documentation',
         'E-commerce Companies securing online brand protection',
     ],
-    image: '/images/trademark/trademark.png',
+  image: '/images/trademark/trademark.png',
     imageHint: 'trademark symbol',
     price: 25,
     pricePer: 'mark',
