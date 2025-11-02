@@ -5,7 +5,8 @@ import type { Metadata } from 'next';
 import ServicePageClient from './ServicePageClient';
 
 type ServicePageProps = {
-  params: { slug: string };
+  // use a permissive params type to satisfy Next's PageProps constraint
+  params: any;
 };
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
