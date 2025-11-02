@@ -4,11 +4,13 @@
 import type { Service } from '@/lib/services';
 import { whyChooseUsReasons, serviceIcons } from '@/lib/services';
 import Image from 'next/image';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Eye, FileText, Calendar, ArrowLeft, ArrowRight, ShoppingCart } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 // Extend JSX to include model-viewer
 declare global {
@@ -29,7 +31,9 @@ declare global {
 }
 
 export default function ServicePageClient({ service, prevSlug, nextSlug, prevService, nextService }: { service: Service, prevSlug: string, nextSlug: string, prevService: Service, nextService: Service }) {
-  return (
+    const [lightbox, setLightbox] = useState<{ open: boolean; src: string; title: string }>({ open: false, src: '', title: '' });
+
+    return (
     <>
       <style dangerouslySetInnerHTML={{
         __html: `
@@ -321,6 +325,54 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
           </div>
         </div>
       </section>
+
+            {/* Design Showcase - modern embedded gallery only for Design Patent service */}
+            {service.slug === 'design-patent-drawing-services' && (
+                <section className="py-16 md:py-24 bg-background">
+                    <div className="container">
+                        <div className="text-center mb-8">
+                            <h2 className="font-headline text-3xl md:text-4xl font-bold">Design Showcase</h2>
+                            <p className="mt-2 max-w-2xl mx-auto text-muted-foreground">A curated selection of design patent illustrations — click any image to view a larger preview.</p>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {(service.examples || []).map((ex, idx) => (
+                                <div key={`design-embed-${idx}`} className="rounded-lg overflow-hidden bg-gray-50 shadow hover:shadow-lg transition-shadow duration-200">
+                                    <button
+                                        className="w-full h-full block text-left"
+                                        onClick={() => {
+                                            setLightbox({ open: true, src: ex.image, title: ex.title })
+                                        }}
+                                        aria-label={`Open ${ex.title}`}
+                                    >
+                                        <div className="relative h-64 sm:h-56 md:h-72">
+                                            <Image src={ex.image} alt={ex.title} fill className="object-cover transition-transform duration-300 hover:scale-105" />
+                                        </div>
+                                        <div className="p-4">
+                                            <h3 className="font-semibold">{ex.title}</h3>
+                                            <p className="text-sm text-muted-foreground mt-1">{ex.hint}</p>
+                                        </div>
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Lightbox dialog */}
+                        <Dialog open={lightbox.open} onOpenChange={(open) => setLightbox((v) => ({ ...v, open }))}>
+                            <DialogContent className="max-w-4xl w-full">
+                                <DialogTitle>{lightbox.title}</DialogTitle>
+                                <DialogDescription>
+                                    <div className="mt-4 w-full h-[60vh] relative">
+                                        {lightbox.src && (
+                                            <Image src={lightbox.src} alt={lightbox.title} fill className="object-contain" />
+                                        )}
+                                    </div>
+                                </DialogDescription>
+                            </DialogContent>
+                        </Dialog>
+                    </div>
+                </section>
+            )}
 
        {service.modelSrc && (
         <section className="py-12 md:py-20 bg-muted">
