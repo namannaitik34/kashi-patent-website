@@ -67,21 +67,41 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
       </section>
 
       {/* Content Section */}
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto justify-items-center">                    <Button variant="outline" size="lg" className="bg-white/10 border-black/20 text-black hover:bg-white/20 hover:text-black/50 backdrop-blur-sm">
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto justify-items-center">
+                {/* View Samples: only show when examples exist for the service */}
+                {service.examples && service.examples.length > 0 ? (
+                    <Button
+                        variant="outline"
+                        size="lg"
+                        className="bg-white/10 border-black/20 text-black hover:bg-white/20 hover:text-black/50 backdrop-blur-sm"
+                        onClick={() => {
+                            const el = document.getElementById('examples')
+                            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                        }}
+                    >
                         <Eye className="mr-2 h-5 w-5" />
                         View Samples
                     </Button>
-                    <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                        <Link href="/order">
-                            <FileText className="mr-2 h-5 w-5" />
-                            Get Quote
-                        </Link>
-                    </Button>
-                    <Button size="lg" className="bg-white text-primary hover:bg-white/90">
+                ) : (
+                    <div />
+                )}
+
+                {/* Get Quote - links to Order page (already present) */}
+                <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                    <Link href="/order">
+                        <FileText className="mr-2 h-5 w-5" />
+                        Get Quote
+                    </Link>
+                </Button>
+
+                {/* Schedule - navigates to the new schedule page with service prefilled */}
+                <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
+                    <Link href={`/schedule?service=${service.slug}`}>
                         <Calendar className="mr-2 h-5 w-5" />
                         Schedule Free Consultancy
-                    </Button>
-                </div>
+                    </Link>
+                </Button>
+            </div>
 
       <div className="container py-20 md:py-28">
         
@@ -154,9 +174,9 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
         </div>
       </div>
 
-        {/* Examples Section - Only show if service has examples */}
-        {service.examples && service.examples.length > 0 && (
-        <section className="py-16 md:py-24 bg-muted/20">
+    {/* Examples Section - Only show if service has examples */}
+    {service.examples && service.examples.length > 0 && (
+    <section id="examples" className="py-16 md:py-24 bg-muted/20">
             <div className="container">
                 <div className="text-center mb-12">
                     <h2 className="font-headline text-3xl md:text-4xl font-bold">Visualizing Excellence: A Glimpse of Our Work</h2>
