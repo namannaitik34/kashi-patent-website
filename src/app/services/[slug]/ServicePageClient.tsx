@@ -326,8 +326,8 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
         </div>
       </section>
 
-            {/* Design Showcase - modern embedded gallery only for Design Patent service */}
-            {service.slug === 'design-patent-drawing-services' && (
+            {/* Design Showcase - embedded gallery for services that have examples (shows on Design pages) */}
+            {service.examples && service.examples.length > 0 && (
                 <section className="py-16 md:py-24 bg-background">
                     <div className="container">
                         <div className="text-center mb-8">
