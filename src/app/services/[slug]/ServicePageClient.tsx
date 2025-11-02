@@ -67,41 +67,23 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
       </section>
 
       {/* Content Section */}
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto justify-items-center">
-                {/* View Samples: only show when examples exist for the service */}
-                {service.examples && service.examples.length > 0 ? (
-                    <Button
-                        variant="outline"
-                        size="lg"
-                        className="bg-white/10 border-black/20 text-black hover:bg-white/20 hover:text-black/50 backdrop-blur-sm"
-                        onClick={() => {
-                            const el = document.getElementById('examples')
-                            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                        }}
-                    >
-                        <Eye className="mr-2 h-5 w-5" />
-                        View Samples
-                    </Button>
-                ) : (
-                    <div />
-                )}
+                    <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto justify-items-center">
+                        {/* Get Quote - links to Order page */}
+                        <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground w-full sm:w-auto">
+                            <Link href="/order">
+                                <FileText className="mr-2 h-5 w-5" />
+                                Get Quote
+                            </Link>
+                        </Button>
 
-                {/* Get Quote - links to Order page (already present) */}
-                <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                    <Link href="/order">
-                        <FileText className="mr-2 h-5 w-5" />
-                        Get Quote
-                    </Link>
-                </Button>
-
-                {/* Schedule - navigates to the new schedule page with service prefilled */}
-                <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
-                    <Link href={`/schedule?service=${service.slug}`}>
-                        <Calendar className="mr-2 h-5 w-5" />
-                        Schedule Free Consultancy
-                    </Link>
-                </Button>
-            </div>
+                        {/* Schedule - navigates to the schedule page with service prefilled */}
+                        <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 w-full sm:w-auto">
+                            <Link href={`/schedule?service=${service.slug}`}>
+                                <Calendar className="mr-2 h-5 w-5" />
+                                Schedule Free Consultancy
+                            </Link>
+                        </Button>
+                    </div>
 
       <div className="container py-20 md:py-28">
         
