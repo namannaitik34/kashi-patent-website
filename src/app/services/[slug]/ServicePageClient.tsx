@@ -32,6 +32,16 @@ declare global {
 
 export default function ServicePageClient({ service, prevSlug, nextSlug, prevService, nextService }: { service: Service, prevSlug: string, nextSlug: string, prevService: Service, nextService: Service }) {
     const [lightbox, setLightbox] = useState<{ open: boolean; src: string; title: string }>({ open: false, src: '', title: '' });
+        // Images for the vacuum design study (shown only on Design Patent service page)
+        const vaccumImages = [
+            '/images/design/vaccum/1.svg',
+            '/images/design/vaccum/2.svg',
+            '/images/design/vaccum/3.svg',
+            '/images/design/vaccum/4.svg',
+            '/images/design/vaccum/5.svg',
+            '/images/design/vaccum/6.svg',
+        ];
+    const [showIndex, setShowIndex] = useState(0);
 
     return (
     <>
@@ -326,53 +336,78 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
         </div>
       </section>
 
-            {/* Design Showcase - embedded gallery for services that have examples (shows on Design pages) */}
-            {service.examples && service.examples.length > 0 && (
-                <section className="py-16 md:py-24 bg-background">
-                    <div className="container">
-                        <div className="text-center mb-8">
-                            <h2 className="font-headline text-3xl md:text-4xl font-bold">Design Showcase</h2>
-                            <p className="mt-2 max-w-2xl mx-auto text-muted-foreground">A curated selection of design patent illustrations — click any image to view a larger preview.</p>
-                        </div>
+            {/* Design Showcase removed per request */}
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {(service.examples || []).map((ex, idx) => (
-                                <div key={`design-embed-${idx}`} className="rounded-lg overflow-hidden bg-gray-50 shadow hover:shadow-lg transition-shadow duration-200">
-                                    <button
-                                        className="w-full h-full block text-left"
-                                        onClick={() => {
-                                            setLightbox({ open: true, src: ex.image, title: ex.title })
-                                        }}
-                                        aria-label={`Open ${ex.title}`}
-                                    >
-                                        <div className="relative h-64 sm:h-56 md:h-72">
-                                            <Image src={ex.image} alt={ex.title} fill className="object-cover transition-transform duration-300 hover:scale-105" />
-                                        </div>
-                                        <div className="p-4">
-                                            <h3 className="font-semibold">{ex.title}</h3>
-                                            <p className="text-sm text-muted-foreground mt-1">{ex.hint}</p>
-                                        </div>
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Lightbox dialog */}
-                        <Dialog open={lightbox.open} onOpenChange={(open) => setLightbox((v) => ({ ...v, open }))}>
-                            <DialogContent className="max-w-4xl w-full">
-                                <DialogTitle>{lightbox.title}</DialogTitle>
-                                <DialogDescription>
-                                    <div className="mt-4 w-full h-[60vh] relative">
-                                        {lightbox.src && (
-                                            <Image src={lightbox.src} alt={lightbox.title} fill className="object-contain" />
-                                        )}
+                        {/* Product Showcase - large hero image with thumbnail strip (Design service only) */}
+                        {service.slug === 'design-patent-drawing-services' && (
+                            <section className="py-16 md:py-24 bg-muted/10">
+                                <div className="container">
+                                    <div className="text-center mb-8">
+                                        <h2 className="font-headline text-3xl md:text-4xl font-bold">Design Study — Vacuum</h2>
+                                        <p className="mt-2 max-w-2xl mx-auto text-muted-foreground">This is a design study, not a product — multiple views and sketches showing ornamental and functional details of the vacuum concept.</p>
                                     </div>
-                                </DialogDescription>
-                            </DialogContent>
-                        </Dialog>
-                    </div>
-                </section>
-            )}
+
+                                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                                        <div className="lg:col-span-8">
+                                            <div className="relative bg-white rounded-lg shadow-lg overflow-hidden">
+                                                <button
+                                                    aria-label="Previous"
+                                                    className="absolute left-3 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/40 text-white p-2 rounded-full"
+                                                    onClick={() => setShowIndex((i) => (i - 1 + vaccumImages.length) % vaccumImages.length)}
+                                                >
+                                                    <ArrowLeft className="w-5 h-5" />
+                                                </button>
+                                                <button
+                                                    aria-label="Next"
+                                                    className="absolute right-3 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/40 text-white p-2 rounded-full"
+                                                    onClick={() => setShowIndex((i) => (i + 1) % vaccumImages.length)}
+                                                >
+                                                    <ArrowRight className="w-5 h-5" />
+                                                </button>
+
+                                                <div className="w-full h-[60vh] md:h-[72vh] relative cursor-pointer" onClick={() => setLightbox({ open: true, src: vaccumImages[showIndex] || '', title: 'Vacuum Design Study' })}>
+                                                    {vaccumImages[showIndex] ? (
+                                                        <Image src={vaccumImages[showIndex]} alt={`Vacuum view ${showIndex + 1}`} fill className="object-contain bg-white" />
+                                                    ) : (
+                                                        <div className="flex items-center justify-center h-full">No images available</div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="lg:col-span-4">
+                                            <div className="space-y-4 sticky top-28">
+                                                <h3 className="text-2xl font-semibold">Vacuum Design Study</h3>
+                                                <p className="text-muted-foreground">A conceptual study focused on form, ergonomics, and ornamental details. These illustrations are intended for design protection and exploration rather than immediate manufacturing.</p>
+                                                <div className="mt-4">
+                                                    <p className="text-sm text-muted-foreground mb-2">Views</p>
+                                                    <div className="flex gap-3 overflow-x-auto">
+                                                        {vaccumImages.map((src, idx) => (
+                                                            <button key={src} onClick={() => setShowIndex(idx)} className={`rounded-md overflow-hidden border ${idx === showIndex ? 'border-primary' : 'border-transparent'} transition-shadow`} aria-label={`Show image ${idx + 1}`}>
+                                                                <div className="relative w-24 h-24">
+                                                                    <Image src={src} alt={`thumb-${idx}`} fill className="object-cover" />
+                                                                </div>
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                </div>
+
+                                                <div className="mt-6">
+                                                    <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+                                                        <Link href="/order">
+                                                            <ShoppingCart className="mr-2 h-5 w-5" />
+                                                            Order Design Drawings
+                                                        </Link>
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        )}
+
+                        {/* More Design Samples removed per request */}
 
        {service.modelSrc && (
         <section className="py-12 md:py-20 bg-muted">
