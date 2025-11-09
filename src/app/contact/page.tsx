@@ -33,8 +33,8 @@ export default function ContactPage() {
             <div>
               <h3 className="text-xl font-semibold">Email</h3>
               <p className="text-muted-foreground">Send us an email for inquiries.</p>
-              <a href="mailto:Amy.moore@kashipatent.com" className="text-primary font-medium hover:underline">
-                Amy.moore@kashipatent.com
+              <a href="mailto:Services@kashipatent.com" className="text-primary font-medium hover:underline">
+                Services@kashipatent.com
               </a>
             </div>
           </div>

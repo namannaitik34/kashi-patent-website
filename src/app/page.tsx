@@ -56,7 +56,7 @@ const workSamples = [
   {
     title: 'Sample',
     category: 'Utility Patent',
-    image: '/images/utility/utility_1.3.svg',
+    image: '/images/utility/utility_1.3.png',
     hint: 'company logo',
     description: 'Developed a clean and distinctive logo, delivered in formats compliant with USPTO, EPO, WIPO, PCT, JPO, CNIPA, and other global patent offices requirements for trademark registration.',
   },
@@ -275,7 +275,7 @@ const faqs = [
   },
   {
     question: "How do I contact your support team?",
-    answer: "You can reach our dedicated support team via email at Amy.moore@kashipatent.com, by phone at +91 914 002 4107, or by filling out the contact form on our website. We're here to assist you with any questions."
+    answer: "You can reach our dedicated support team via email at Services@kashipatent.com, by phone at +91 914 002 4107, or by filling out the contact form on our website. We're here to assist you with any questions."
   }
 ];
 
