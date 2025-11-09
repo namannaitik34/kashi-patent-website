@@ -23,6 +23,12 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+    // Allow serving SVGs via the Next.js image optimizer in production.
+    // Local dev can be lenient, but production (Vercel) blocks SVGs by default
+    // when routed through /_next/image. Enabling this allows our in-repo SVGs
+    // to be optimized and served correctly. If you prefer not to enable this
+    // globally, consider adding `unoptimized` to individual <Image/> usages.
+    dangerouslyAllowSVG: true,
   },
 };
 

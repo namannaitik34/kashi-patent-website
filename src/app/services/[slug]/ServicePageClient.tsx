@@ -335,7 +335,7 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
           </div>
         </div>
       </section>
-
+      
             {/* Design Showcase removed per request */}
 
                         {/* Product Showcase - large hero image with thumbnail strip (Design service only) */}

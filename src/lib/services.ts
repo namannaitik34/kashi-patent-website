@@ -95,7 +95,7 @@ export const services: Service[] = [
         },
         {
             title: 'Sample',
-            image: '/images/utility/utility_1.3.svg',
+            image: '/images/utility/utility_1.3.png',
             hint: 'software flowchart',
         },
         {
@@ -147,7 +147,7 @@ export const services: Service[] = [
         },
         {
             title: 'Sample',
-            image: '/images/utility/utility_2.4.svg',
+            image: '/images/utility/utility_2.4.png',
             hint: 'system overview',
         },
         {
