@@ -7,12 +7,44 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { toast } from '@/hooks/use-toast'
+import { useState } from "react";
 
 export default function ContactPage() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, you'd handle form submission here.
-    alert("Thank you for your message! We will get back to you shortly.");
+    const form = e.currentTarget as HTMLFormElement
+    const fd = new FormData(form)
+    // ensure access key is present (replace later with real key)
+    fd.append("access_key", "4419d6f4-fb12-4da7-b814-36f4a9c10bb9")
+
+    try {
+      setIsSubmitting(true)
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: fd,
+      })
+
+      const text = await res.text().catch(() => '')
+      let json: any = null
+      try { json = text ? JSON.parse(text) : null } catch {}
+
+      if (!res.ok) {
+        const err = json?.error || json?.message || text || 'Submission failed'
+        toast({ title: 'Submission error', description: String(err) })
+        return
+      }
+
+      toast({ title: 'Message sent', description: 'Thanks — we received your message and will respond soon.' })
+      form.reset()
+    } catch (err: any) {
+      console.error(err)
+      toast({ title: 'Submission error', description: err?.message || 'There was a problem sending your message.' })
+    } finally {
+      setIsSubmitting(false)
+    }
   };
 
   return (
@@ -72,22 +104,24 @@ export default function ContactPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="name">Full Name</Label>
-                    <Input id="name" placeholder="John Doe" required />
+                    <Input id="name" name="name" placeholder="John Doe" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address</Label>
-                    <Input id="email" type="email" placeholder="you@example.com" required />
+                    <Input id="email" name="email" type="email" placeholder="you@example.com" required />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subject</Label>
-                  <Input id="subject" placeholder="Question about Utility Drawings" required />
+                  <Input id="subject" name="subject" placeholder="Question about Utility Drawings" required />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" placeholder="Please describe your project or question in detail." required rows={6} />
+                  <Textarea id="message" name="message" placeholder="Please describe your project or question in detail." required rows={6} />
                 </div>
-                <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">Send Message</Button>
+                <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </Button>
               </form>
             </CardContent>
           </Card>

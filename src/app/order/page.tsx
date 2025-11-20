@@ -37,6 +37,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import Link from "next/link";
 import { Loader2, FileUp, Lock, CheckCircle, ShieldCheck } from "lucide-react";
+import { toast } from '@/hooks/use-toast'
 
 const orderFormSchema = z.object({
   fullName: z.string().min(2, { message: "Full name must be at least 2 characters." }),
@@ -65,12 +66,39 @@ export default function OrderPage() {
 
   async function onSubmit(data: OrderFormValues) {
     setIsSubmitting(true);
-    console.log(data);
-    // Simulate API call for form submission and file upload
-    await new Promise((resolve) => setTimeout(resolve, 2500));
-    setIsSubmitting(false);
-    setShowConfirmation(true);
-    form.reset();
+    try {
+      const files = data.files ? Array.from((data.files as unknown) as FileList).map((f) => f.name) : []
+      const payload = {
+        type: 'order',
+        name: data.fullName,
+        email: data.email,
+        service: data.service,
+        subject: data.projectTitle,
+        message: data.description,
+        data: { files },
+      }
+
+      const res = await fetch('/api/submissions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      if (!res.ok) {
+        let err = 'Submission failed'
+        try { const json = await res.json(); err = json?.error || json?.message || err } catch {}
+        toast({ title: 'Submission error', description: String(err) })
+        return
+      }
+
+      setShowConfirmation(true);
+      form.reset();
+    } catch (err: any) {
+      console.error(err)
+      toast({ title: 'Submission error', description: err?.message || 'There was a problem submitting your project.' })
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (

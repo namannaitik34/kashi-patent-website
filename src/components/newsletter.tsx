@@ -1,19 +1,48 @@
 "use client";
 
 import Image from 'next/image';
+import { useState } from 'react'
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Send } from 'lucide-react';
+import { toast } from '@/hooks/use-toast'
 
 export default function Newsletter() {
-    // A simple form handler for demonstration.
-    // In a real app, you would integrate this with a newsletter service.
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const [isSubmitting, setIsSubmitting] = useState(false)
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const email = e.currentTarget.email.value;
-        if (email) {
-            alert(`Thank you for subscribing, ${email}!`);
-            e.currentTarget.reset();
+        const form = e.currentTarget as HTMLFormElement
+        const fd = new FormData(form)
+        fd.append("access_key", "fcd3ab93-0f10-471c-9916-d69ad3e10a2a")
+        const email = fd.get('email')?.toString() || ''
+        if (!email) return
+
+        try {
+            setIsSubmitting(true)
+            const res = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: fd,
+            })
+
+            const text = await res.text().catch(() => '')
+            let json: any = null
+            try { json = text ? JSON.parse(text) : null } catch {}
+
+
+            if (!res.ok) {
+                const err = json?.error || json?.message || text || 'Subscription failed'
+                toast({ title: 'Subscription error', description: String(err) })
+                return
+            }
+
+            toast({ title: 'Subscribed', description: `Thanks — we received your subscription for ${email}.` })
+            form.reset()
+        } catch (err: any) {
+            console.error(err)
+            toast({ title: 'Subscription error', description: err?.message || 'There was a problem subscribing.' })
+        } finally {
+            setIsSubmitting(false)
         }
     };
 
@@ -42,9 +71,9 @@ export default function Newsletter() {
                                     aria-label="Email address"
                                     required
                                 />
-                                <Button type="submit" size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                                <Button type="submit" size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground" disabled={isSubmitting}>
                                     <Send className="mr-2 h-4 w-4" />
-                                    Subscribe
+                                    {isSubmitting ? 'Subscribing...' : 'Subscribe'}
                                 </Button>
                             </form>
                         </div>

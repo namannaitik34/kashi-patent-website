@@ -23,28 +23,65 @@ export default function ScheduleClient() {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [notes, setNotes] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     if (preService) setServiceSlug(preService)
   }, [preService])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    toast({
-      title: 'Consultancy Requested',
-      description: (
-        <span>
-          Thanks {name || 'there'} — we've received your request for {serviceSlug || 'a consultation'} on {date} at {time}. We'll contact you at {email || phone} to confirm.
-        </span>
-      ),
-    })
+    const form = e.currentTarget as HTMLFormElement
+    const fd = new FormData()
+    // append access_key and controlled values
+    fd.append('access_key', 'f7c68485-dc33-4964-bb50-6a521e8a2d7d')
+    fd.append('type', 'schedule')
+    fd.append('name', name)
+    fd.append('email', email)
+    fd.append('phone', phone)
+    fd.append('service', serviceSlug)
+    fd.append('date', date)
+    fd.append('time', time)
+    fd.append('notes', notes)
 
-    setName('')
-    setEmail('')
-    setPhone('')
-    setDate('')
-    setTime('')
-    setNotes('')
+    try {
+      setIsSubmitting(true)
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: fd,
+      })
+
+      const text = await res.text().catch(() => '')
+      let json: any = null
+      try { json = text ? JSON.parse(text) : null } catch {}
+
+      if (!res.ok) {
+        const err = json?.error || json?.message || text || 'Submission failed'
+        toast({ title: 'Submission error', description: String(err) })
+        return
+      }
+
+      toast({
+        title: 'Consultancy Requested',
+        description: (
+          <span>
+            Thanks {name || 'there'} — we've received your request for {serviceSlug || 'a consultation'} on {date} at {time}. We'll contact you at {email || phone} to confirm.
+          </span>
+        ),
+      })
+
+      setName('')
+      setEmail('')
+      setPhone('')
+      setDate('')
+      setTime('')
+      setNotes('')
+    } catch (err: any) {
+      console.error(err)
+      toast({ title: 'Submission error', description: err?.message || 'There was a problem sending your request.' })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const selectedService = services.find((s) => s.slug === serviceSlug)
@@ -130,7 +167,9 @@ export default function ScheduleClient() {
               </div>
 
               <div className="flex items-center gap-3">
-                <Button type="submit" className="bg-accent hover:bg-accent/90 text-accent-foreground">Request Slot</Button>
+                <Button type="submit" className="bg-accent hover:bg-accent/90 text-accent-foreground" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Request Slot'}
+                </Button>
                 <Button variant="outline" asChild>
                   <a href="/contact">Need help?</a>
                 </Button>
