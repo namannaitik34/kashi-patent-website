@@ -17,22 +17,25 @@ export default function ContactPage() {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement
     const fd = new FormData(form)
-    // ensure access key is present (replace later with real key)
-    fd.append("access_key", "4419d6f4-fb12-4da7-b814-36f4a9c10bb9")
+    const payload = {
+      type: 'contact',
+      name: fd.get('name')?.toString() || '',
+      email: fd.get('email')?.toString() || '',
+      subject: fd.get('subject')?.toString() || '',
+      message: fd.get('message')?.toString() || '',
+    }
 
     try {
       setIsSubmitting(true)
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/api/submissions', {
         method: 'POST',
-        body: fd,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       })
 
-      const text = await res.text().catch(() => '')
-      let json: any = null
-      try { json = text ? JSON.parse(text) : null } catch {}
-
       if (!res.ok) {
-        const err = json?.error || json?.message || text || 'Submission failed'
+        let err = 'Submission failed'
+        try { const json = await res.json(); err = json?.error || json?.message || err } catch {}
         toast({ title: 'Submission error', description: String(err) })
         return
       }

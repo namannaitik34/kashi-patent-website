@@ -31,32 +31,28 @@ export default function ScheduleClient() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const form = e.currentTarget as HTMLFormElement
-    const fd = new FormData()
-    // append access_key and controlled values
-    fd.append('access_key', 'f7c68485-dc33-4964-bb50-6a521e8a2d7d')
-    fd.append('type', 'schedule')
-    fd.append('name', name)
-    fd.append('email', email)
-    fd.append('phone', phone)
-    fd.append('service', serviceSlug)
-    fd.append('date', date)
-    fd.append('time', time)
-    fd.append('notes', notes)
+    const payload = {
+      type: 'schedule',
+      name,
+      email,
+      phone,
+      service: serviceSlug,
+      date,
+      time,
+      notes,
+    }
 
     try {
       setIsSubmitting(true)
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/api/submissions', {
         method: 'POST',
-        body: fd,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       })
 
-      const text = await res.text().catch(() => '')
-      let json: any = null
-      try { json = text ? JSON.parse(text) : null } catch {}
-
       if (!res.ok) {
-        const err = json?.error || json?.message || text || 'Submission failed'
+        let err = 'Submission failed'
+        try { const json = await res.json(); err = json?.error || json?.message || err } catch {}
         toast({ title: 'Submission error', description: String(err) })
         return
       }

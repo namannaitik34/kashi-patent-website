@@ -14,24 +14,20 @@ export default function Newsletter() {
         e.preventDefault();
         const form = e.currentTarget as HTMLFormElement
         const fd = new FormData(form)
-        fd.append("access_key", "fcd3ab93-0f10-471c-9916-d69ad3e10a2a")
         const email = fd.get('email')?.toString() || ''
         if (!email) return
 
         try {
             setIsSubmitting(true)
-            const res = await fetch('https://api.web3forms.com/submit', {
+            const res = await fetch('/api/submissions', {
                 method: 'POST',
-                body: fd,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type: 'newsletter', email }),
             })
 
-            const text = await res.text().catch(() => '')
-            let json: any = null
-            try { json = text ? JSON.parse(text) : null } catch {}
-
-
             if (!res.ok) {
-                const err = json?.error || json?.message || text || 'Subscription failed'
+                let err = 'Subscription failed'
+                try { const json = await res.json(); err = json?.error || json?.message || err } catch {}
                 toast({ title: 'Subscription error', description: String(err) })
                 return
             }

@@ -325,44 +325,44 @@ export const services: Service[] = [
             hint: 'headset angle 10',
         },
     ],
-    secondRowExamples: [
-        {
-            title: "Sample",
-            image: '/images/dress/1.svg',
-            hint: "women's wear angle 1",
-        },
-        {
-            title: "Sample",
-            image: '/images/dress/2.svg',
-            hint: "women's wear angle 2",
-        },
-        {
-            title: "Sample",
-            image: '/images/dress/3.svg',
-            hint: "women's wear angle 3",
-        },
-        {
-            title: "Sample",
-            image: '/images/dress/4.svg',
-            hint: "women's wear angle 4",
-        },
-        {
-            title: "Sample",
-            image: '/images/dress/5.svg',
-            hint: "women's wear angle 5",
-        },
-        {
-            title: "Sample",
-            image: '/images/dress/6.svg',
-            hint: "women's wear angle 6",
-        },
-        {
-            title: "Sample",
-            image: '/images/dress/7.svg',
-            hint: "women's wear angle 7",
-        },
+    // secondRowExamples: [
+    //     {
+    //         title: "Sample",
+    //         image: '/images/dress/1.svg',
+    //         hint: "women's wear angle 1",
+    //     },
+    //     {
+    //         title: "Sample",
+    //         image: '/images/dress/2.svg',
+    //         hint: "women's wear angle 2",
+    //     },
+    //     {
+    //         title: "Sample",
+    //         image: '/images/dress/3.svg',
+    //         hint: "women's wear angle 3",
+    //     },
+    //     {
+    //         title: "Sample",
+    //         image: '/images/dress/4.svg',
+    //         hint: "women's wear angle 4",
+    //     },
+    //     {
+    //         title: "Sample",
+    //         image: '/images/dress/5.svg',
+    //         hint: "women's wear angle 5",
+    //     },
+    //     {
+    //         title: "Sample",
+    //         image: '/images/dress/6.svg',
+    //         hint: "women's wear angle 6",
+    //     },
+    //     {
+    //         title: "Sample",
+    //         image: '/images/dress/7.svg',
+    //         hint: "women's wear angle 7",
+    //     },
 
-    ],
+    // ],
     keyFeatures: [
       {
         icon: 'FileCheck2',
