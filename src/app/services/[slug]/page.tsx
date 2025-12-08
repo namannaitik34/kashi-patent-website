@@ -10,7 +10,8 @@ type ServicePageProps = {
 };
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
-  const service = getServiceBySlug(params.slug);
+  const resolvedParams = await params;
+  const service = getServiceBySlug(resolvedParams.slug);
 
   if (!service) {
     return {
@@ -24,14 +25,15 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   };
 }
 
-export default function ServicePage({ params }: ServicePageProps) {
-  const service = getServiceBySlug(params.slug);
+export default async function ServicePage({ params }: ServicePageProps) {
+  const resolvedParams = await params;
+  const service = getServiceBySlug(resolvedParams.slug);
 
   if (!service) {
     notFound();
   }
 
-  const currentIndex = services.findIndex((s) => s.slug === params.slug);
+  const currentIndex = services.findIndex((s) => s.slug === resolvedParams.slug);
   const prevService = services[currentIndex - 1] ?? services[services.length - 1];
   const nextService = services[currentIndex + 1] ?? services[0];
 
