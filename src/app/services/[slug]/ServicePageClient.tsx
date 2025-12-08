@@ -43,6 +43,53 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
         ];
     const [showIndex, setShowIndex] = useState(0);
 
+        // Shared image card renderer with hover zoom and lightbox on click
+        const ExampleCard = ({ example, index, prefix }: { example: { image: string; title: string; hint: string }; index: number; prefix: string }) => (
+            <div
+                key={`${prefix}-${index}`}
+                className="group relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-[250px] md:w-[350px] h-[250px] md:h-[350px] cursor-zoom-in"
+                onMouseMove={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    const img = e.currentTarget.querySelector('img') as HTMLImageElement;
+                    if (img) {
+                        img.style.transformOrigin = `${x}% ${y}%`;
+                    }
+                }}
+                onClick={() => setLightbox({ open: true, src: example.image, title: example.title })}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setLightbox({ open: true, src: example.image, title: example.title });
+                    }
+                }}
+            >
+                <Image
+                    src={example.image}
+                    alt={example.title}
+                    width={350}
+                    height={350}
+                    className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-150"
+                    data-ai-hint={example.hint}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100 group-hover:opacity-30 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 p-4 group-hover:opacity-0 transition-opacity duration-300">
+                    <h3 className="text-white font-semibold text-lg">{example.title}</h3>
+                </div>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <div className="absolute top-2 right-2 bg-white/20 backdrop-blur-sm rounded-full p-2">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        );
+
     return (
     <>
       <style dangerouslySetInnerHTML={{
@@ -56,6 +103,19 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
         `
       }} />
       <div className="bg-background relative">
+                <Dialog open={lightbox.open} onOpenChange={(open) => setLightbox((prev) => ({ ...prev, open }))}>
+                    <DialogContent className="max-w-4xl">
+                        <DialogTitle>{lightbox.title || 'Preview'}</DialogTitle>
+                        <DialogDescription>Click outside or press ESC to close.</DialogDescription>
+                        <div className="relative w-full h-[60vh] mt-4">
+                            {lightbox.src ? (
+                                <Image src={lightbox.src} alt={lightbox.title || 'Preview'} fill className="object-contain" />
+                            ) : (
+                                <div className="flex items-center justify-center h-full">No image selected</div>
+                            )}
+                        </div>
+                    </DialogContent>
+                </Dialog>
         {/* landing page */}
       <section className="relative h-[60vh] w-full bg-black flex items-center justify-center">
         <Image
@@ -186,41 +246,7 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
                         <div className="flex gap-8 animate-infinite-scroll hover:pause" style={{ width: 'max-content' }}>
                         {/* Show actual examples from the service - no duplicates */}
                         {service.examples.map((example, index) => (
-                            <div 
-                                key={`example-${index}`} 
-                                className="group relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-[250px] md:w-[350px] h-[250px] md:h-[350px] cursor-crosshair"
-                                onMouseMove={(e) => {
-                                    const rect = e.currentTarget.getBoundingClientRect();
-                                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                                    const y = ((e.clientY - rect.top) / rect.height) * 100;
-                                    const img = e.currentTarget.querySelector('img') as HTMLImageElement;
-                                    if (img) {
-                                        img.style.transformOrigin = `${x}% ${y}%`;
-                                    }
-                                }}
-                            >
-                                <Image
-                                    src={example.image}
-                                    alt={example.title}
-                                    width={350}
-                                    height={350}
-                                    className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-150"
-                                    data-ai-hint={example.hint}
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100 group-hover:opacity-30 transition-opacity duration-300" />
-                                <div className="absolute bottom-0 left-0 p-4 group-hover:opacity-0 transition-opacity duration-300">
-                                    <h3 className="text-white font-semibold text-lg">{example.title}</h3>
-                                </div>
-                                {/* Custom cursor indicator */}
-                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                    <div className="absolute top-2 right-2 bg-white/20 backdrop-blur-sm rounded-full p-2">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
-                                            <circle cx="11" cy="11" r="8"/>
-                                            <path d="m21 21-4.35-4.35"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
+                          <ExampleCard example={example} index={index} prefix="example" />
                         ))}
                         </div>
                     </div>
@@ -229,82 +255,84 @@ export default function ServicePageClient({ service, prevSlug, nextSlug, prevSer
                     <div className="overflow-x-auto scrollbar-hide">
                         <div className="flex gap-8 animate-infinite-scroll-reverse hover:pause" style={{ width: 'max-content' }}>
                         {service.secondRowExamples ? service.secondRowExamples.map((example, index) => (
-                            <div 
-                                key={`second-row-${index}`} 
-                                className="group relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-[250px] md:w-[350px] h-[250px] md:h-[350px] cursor-crosshair"
-                                onMouseMove={(e) => {
-                                    const rect = e.currentTarget.getBoundingClientRect();
-                                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                                    const y = ((e.clientY - rect.top) / rect.height) * 100;
-                                    const img = e.currentTarget.querySelector('img') as HTMLImageElement;
-                                    if (img) {
-                                        img.style.transformOrigin = `${x}% ${y}%`;
-                                    }
-                                }}
-                            >
-                                <Image
-                                    src={example.image}
-                                    alt={example.title}
-                                    width={350}
-                                    height={350}
-                                    className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-150"
-                                    data-ai-hint={example.hint}
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100 group-hover:opacity-30 transition-opacity duration-300" />
-                                <div className="absolute bottom-0 left-0 p-4 group-hover:opacity-0 transition-opacity duration-300">
-                                    <h3 className="text-white font-semibold text-lg">{example.title}</h3>
-                                </div>
-                                {/* Custom cursor indicator */}
-                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                    <div className="absolute top-2 right-2 bg-white/20 backdrop-blur-sm rounded-full p-2">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
-                                            <circle cx="11" cy="11" r="8"/>
-                                            <path d="m21 21-4.35-4.35"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
+                          <ExampleCard example={example} index={index} prefix="second-row" />
                         )) : null}
                         {/* Duplicate for seamless infinite scroll */}
                         {service.secondRowExamples ? service.secondRowExamples.map((example, index) => (
-                            <div 
-                                key={`second-row-duplicate-${index}`} 
-                                className="group relative overflow-hidden rounded-lg shadow-lg flex-shrink-0 w-[250px] md:w-[350px] h-[250px] md:h-[350px] cursor-crosshair"
-                                onMouseMove={(e) => {
-                                    const rect = e.currentTarget.getBoundingClientRect();
-                                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                                    const y = ((e.clientY - rect.top) / rect.height) * 100;
-                                    const img = e.currentTarget.querySelector('img') as HTMLImageElement;
-                                    if (img) {
-                                        img.style.transformOrigin = `${x}% ${y}%`;
-                                    }
-                                }}
-                            >
-                                <Image
-                                    src={example.image}
-                                    alt={example.title}
-                                    width={350}
-                                    height={350}
-                                    className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover:scale-150"
-                                    data-ai-hint={example.hint}
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-100 group-hover:opacity-30 transition-opacity duration-300" />
-                                <div className="absolute bottom-0 left-0 p-4 group-hover:opacity-0 transition-opacity duration-300">
-                                    <h3 className="text-white font-semibold text-lg">{example.title}</h3>
-                                </div>
-                                {/* Custom cursor indicator */}
-                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                    <div className="absolute top-2 right-2 bg-white/20 backdrop-blur-sm rounded-full p-2">
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
-                                            <circle cx="11" cy="11" r="8"/>
-                                            <path d="m21 21-4.35-4.35"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
+                          <ExampleCard example={example} index={index} prefix="second-row-duplicate" />
                         )) : null}
                         </div>
                     </div>
+
+                    {/* Third row */}
+                    {service.thirdRowExamples ? (
+                    <div className="overflow-x-auto scrollbar-hide">
+                        <div className="flex gap-8 animate-infinite-scroll hover:pause" style={{ width: 'max-content' }}>
+                        {service.thirdRowExamples.map((example, index) => (
+                          <ExampleCard example={example} index={index} prefix="third-row" />
+                        ))}
+                        {service.thirdRowExamples.map((example, index) => (
+                          <ExampleCard example={example} index={index} prefix="third-row-duplicate" />
+                        ))}
+                        </div>
+                    </div>
+                    ) : null}
+
+                    {/* Fourth row */}
+                    {service.fourthRowExamples ? (
+                    <div className="overflow-x-auto scrollbar-hide">
+                        <div className="flex gap-8 animate-infinite-scroll-reverse hover:pause" style={{ width: 'max-content' }}>
+                                                {service.fourthRowExamples.map((example, index) => (
+                                                    <ExampleCard example={example} index={index} prefix="fourth-row" />
+                                                ))}
+                                                {service.fourthRowExamples.map((example, index) => (
+                                                    <ExampleCard example={example} index={index} prefix="fourth-row-duplicate" />
+                                                ))}
+                        </div>
+                    </div>
+                    ) : null}
+
+                                        {/* Fifth row */}
+                                        {service.fifthRowExamples ? (
+                                        <div className="overflow-x-auto scrollbar-hide">
+                                                <div className="flex gap-8 animate-infinite-scroll hover:pause" style={{ width: 'max-content' }}>
+                                                {service.fifthRowExamples.map((example, index) => (
+                                                    <ExampleCard example={example} index={index} prefix="fifth-row" />
+                                                ))}
+                                                {service.fifthRowExamples.map((example, index) => (
+                                                    <ExampleCard example={example} index={index} prefix="fifth-row-duplicate" />
+                                                ))}
+                                                </div>
+                                        </div>
+                                        ) : null}
+
+                                        {/* Sixth row */}
+                                        {service.sixthRowExamples ? (
+                                        <div className="overflow-x-auto scrollbar-hide">
+                                                <div className="flex gap-8 animate-infinite-scroll-reverse hover:pause" style={{ width: 'max-content' }}>
+                                                {service.sixthRowExamples.map((example, index) => (
+                                                    <ExampleCard example={example} index={index} prefix="sixth-row" />
+                                                ))}
+                                                {service.sixthRowExamples.map((example, index) => (
+                                                    <ExampleCard example={example} index={index} prefix="sixth-row-duplicate" />
+                                                ))}
+                                                </div>
+                                        </div>
+                                        ) : null}
+
+                                        {/* Seventh row */}
+                                        {service.seventhRowExamples ? (
+                                        <div className="overflow-x-auto scrollbar-hide">
+                                                <div className="flex gap-8 animate-infinite-scroll hover:pause" style={{ width: 'max-content' }}>
+                                                {service.seventhRowExamples.map((example, index) => (
+                                                    <ExampleCard example={example} index={index} prefix="seventh-row" />
+                                                ))}
+                                                {service.seventhRowExamples.map((example, index) => (
+                                                    <ExampleCard example={example} index={index} prefix="seventh-row-duplicate" />
+                                                ))}
+                                                </div>
+                                        </div>
+                                        ) : null}
                 </div>
             </div>
         </section>

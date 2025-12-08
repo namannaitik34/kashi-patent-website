@@ -45,6 +45,31 @@ export type Service = {
     image: string;
     hint: string;
   }[];
+  thirdRowExamples?: {
+    title: string;
+    image: string;
+    hint: string;
+  }[];
+  fourthRowExamples?: {
+    title: string;
+    image: string;
+    hint: string;
+  }[];
+  fifthRowExamples?: {
+    title: string;
+    image: string;
+    hint: string;
+  }[];
+  sixthRowExamples?: {
+    title: string;
+    image: string;
+    hint: string;
+  }[];
+  seventhRowExamples?: {
+    title: string;
+    image: string;
+    hint: string;
+  }[];
   keyFeatures: {
     icon: ServiceIconName;
     title: string;
@@ -147,7 +172,7 @@ export const services: Service[] = [
         },
         {
             title: 'Sample',
-            image: '/images/utility/utility_2.4.png',
+            image: '/images/utility/utility_2.4.svg',
             hint: 'system overview',
         },
         {
@@ -325,44 +350,50 @@ export const services: Service[] = [
             hint: 'headset angle 10',
         },
     ],
-    // secondRowExamples: [
-    //     {
-    //         title: "Sample",
-    //         image: '/images/dress/1.svg',
-    //         hint: "women's wear angle 1",
-    //     },
-    //     {
-    //         title: "Sample",
-    //         image: '/images/dress/2.svg',
-    //         hint: "women's wear angle 2",
-    //     },
-    //     {
-    //         title: "Sample",
-    //         image: '/images/dress/3.svg',
-    //         hint: "women's wear angle 3",
-    //     },
-    //     {
-    //         title: "Sample",
-    //         image: '/images/dress/4.svg',
-    //         hint: "women's wear angle 4",
-    //     },
-    //     {
-    //         title: "Sample",
-    //         image: '/images/dress/5.svg',
-    //         hint: "women's wear angle 5",
-    //     },
-    //     {
-    //         title: "Sample",
-    //         image: '/images/dress/6.svg',
-    //         hint: "women's wear angle 6",
-    //     },
-    //     {
-    //         title: "Sample",
-    //         image: '/images/dress/7.svg',
-    //         hint: "women's wear angle 7",
-    //     },
-
-    // ],
+        secondRowExamples: [
+          { title: 'Sample', image: '/images/design/bottle-design/1.svg', hint: "women's wear angle 1" },
+          { title: 'Sample', image: '/images/design/bottle-design/2.svg', hint: "women's wear angle 2" },
+          { title: 'Sample', image: '/images/design/bottle-design/3.svg', hint: "women's wear angle 3" },
+          { title: 'Sample', image: '/images/design/bottle-design/4.svg', hint: "women's wear angle 4" },
+          { title: 'Sample', image: '/images/design/bottle-design/5.svg', hint: "women's wear angle 5" },
+          { title: 'Sample', image: '/images/design/bottle-design/6.svg', hint: "women's wear angle 6" },
+        ],
+        thirdRowExamples: [
+          { title: 'Sample', image: '/images/design/vaccum/1.svg', hint: 'sofa angle 1' },
+          { title: 'Sample', image: '/images/design/vaccum/2.svg', hint: 'sofa angle 2' },
+          { title: 'Sample', image: '/images/design/vaccum/3.svg', hint: 'sofa angle 3' },
+          { title: 'Sample', image: '/images/design/vaccum/4.svg', hint: 'sofa angle 4' },
+          { title: 'Sample', image: '/images/design/vaccum/5.svg', hint: 'sofa angle 5' },
+          { title: 'Sample', image: '/images/design/vaccum/6.svg', hint: 'sofa angle 6' },
+        ],
+        fourthRowExamples: [
+          { title: 'Sample', image: '/images/design/sofa-design/1.svg', hint: 'bottle angle 1' },
+          { title: 'Sample', image: '/images/design/sofa-design/2.svg', hint: 'bottle angle 2' },
+          { title: 'Sample', image: '/images/design/sofa-design/3.svg', hint: 'bottle angle 3' },
+          { title: 'Sample', image: '/images/design/sofa-design/4.svg', hint: 'bottle angle 4' },
+          { title: 'Sample', image: '/images/design/sofa-design/5.svg', hint: 'bottle angle 5' },
+          { title: 'Sample', image: '/images/design/sofa-design/6.svg', hint: 'bottle angle 6' },
+          { title: 'Sample', image: '/images/design/sofa-design/7.svg', hint: 'bottle angle 6' },
+          { title: 'Sample', image: '/images/design/sofa-design/8.svg', hint: 'bottle angle 6' },
+        ],
+        fifthRowExamples: [
+          { title: 'Sample', image: '/images/design/dress/11.svg', hint: 'dress angle 1' },
+          { title: 'Sample', image: '/images/design/dress/12.svg', hint: 'dress angle 2' },
+          { title: 'Sample', image: '/images/design/dress/13.svg', hint: 'dress angle 3' },
+          { title: 'Sample', image: '/images/design/dress/14.svg', hint: 'dress angle 4' },
+        ],
+        sixthRowExamples: [
+          { title: 'Sample', image: '/images/design/dress/15.svg', hint: 'dress angle 5' },
+          { title: 'Sample', image: '/images/design/dress/16.svg', hint: 'dress angle 6' },
+          { title: 'Sample', image: '/images/design/dress/17.svg', hint: 'dress angle 7' },
+          { title: 'Sample', image: '/images/design/dress/18.svg', hint: 'dress angle 8' },
+        ],
+        seventhRowExamples: [
+          { title: 'Sample', image: '/images/headset/7.svg', hint: 'headset detail 7' },
+          { title: 'Sample', image: '/images/headset/8.svg', hint: 'headset detail 8' },
+          { title: 'Sample', image: '/images/headset/9.svg', hint: 'headset detail 9' },
+          { title: 'Sample', image: '/images/headset/10.svg', hint: 'headset detail 10' },
+        ],
     keyFeatures: [
       {
         icon: 'FileCheck2',
